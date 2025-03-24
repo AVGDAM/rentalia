@@ -27,10 +27,17 @@ export default function NuevoArticuloPage() {
     fechaFin: "",
   });
 
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
+  };
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // Aquí irá la lógica para enviar el formulario
-    console.log('Formulario enviado');
+    console.log('Formulario enviado:', formData);
   };
 
   return (
@@ -51,6 +58,9 @@ export default function NuevoArticuloPage() {
                 id="title"
                 placeholder="Ej: Vestido de Fiesta Elegante"
                 required
+                name="nombre"
+                value={formData.nombre}
+                onChange={handleChange}
               />
             </div>
 
@@ -61,13 +71,21 @@ export default function NuevoArticuloPage() {
                 placeholder="Describe tu artículo en detalle..."
                 className="min-h-[100px]"
                 required
+                name="descripcion"
+                value={formData.descripcion}
+                onChange={handleChange}
               />
             </div>
 
             <div className="grid grid-cols-2 gap-4">
               <div className="space-y-2">
                 <Label htmlFor="category">Categoría</Label>
-                <Select>
+                <Select
+                  id="category"
+                  name="categoria"
+                  value={formData.categoria}
+                  onValueChange={(value) => setFormData(prev => ({ ...prev, categoria: value }))}
+                >
                   <SelectTrigger>
                     <SelectValue placeholder="Selecciona una categoría" />
                   </SelectTrigger>
@@ -82,18 +100,12 @@ export default function NuevoArticuloPage() {
 
               <div className="space-y-2">
                 <Label htmlFor="size">Talla</Label>
-                <Select>
-                  <SelectTrigger>
-                    <SelectValue placeholder="Selecciona una talla" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="xs">XS</SelectItem>
-                    <SelectItem value="s">S</SelectItem>
-                    <SelectItem value="m">M</SelectItem>
-                    <SelectItem value="l">L</SelectItem>
-                    <SelectItem value="xl">XL</SelectItem>
-                  </SelectContent>
-                </Select>
+                <Input
+                  id="size"
+                  name="talla"
+                  value={formData.talla}
+                  onChange={handleChange}
+                />
               </div>
             </div>
           </CardContent>
@@ -114,6 +126,9 @@ export default function NuevoArticuloPage() {
                   step="0.01"
                   placeholder="0.00"
                   required
+                  name="precio"
+                  value={formData.precio}
+                  onChange={handleChange}
                 />
               </div>
               <div className="space-y-2">
@@ -127,6 +142,58 @@ export default function NuevoArticuloPage() {
                   required
                 />
               </div>
+            </div>
+          </CardContent>
+        </Card>
+
+        <Card>
+          <CardHeader>
+            <CardTitle>Estado</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div>
+              <Label htmlFor="estado">Estado</Label>
+              <select
+                id="estado"
+                name="estado"
+                value={formData.estado}
+                onChange={handleChange}
+                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+              >
+                <option value="disponible">Disponible</option>
+                <option value="alquilado">Alquilado</option>
+                <option value="mantenimiento">En mantenimiento</option>
+              </select>
+            </div>
+          </CardContent>
+        </Card>
+
+        <Card>
+          <CardHeader>
+            <CardTitle>Fechas</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div>
+              <Label htmlFor="fechaInicio">Fecha de inicio</Label>
+              <input
+                type="date"
+                id="fechaInicio"
+                name="fechaInicio"
+                value={formData.fechaInicio}
+                onChange={handleChange}
+                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+              />
+            </div>
+            <div>
+              <Label htmlFor="fechaFin">Fecha de fin</Label>
+              <input
+                type="date"
+                id="fechaFin"
+                name="fechaFin"
+                value={formData.fechaFin}
+                onChange={handleChange}
+                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+              />
             </div>
           </CardContent>
         </Card>
