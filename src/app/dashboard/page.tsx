@@ -115,7 +115,7 @@ export default function DashboardPage() {
       </div>
 
       <p className="text-sm text-gray-500">
-        &ldquo;¡Bienvenido a tu panel de control! Aquí podrás gestionar todos tus artículos y reservas.&rdquo;
+        &quot;¡Bienvenido a tu panel de control! Aquí podrás gestionar todos tus artículos y reservas.&quot;
       </p>
     </div>
   );

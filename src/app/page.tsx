@@ -144,7 +144,7 @@ export default function Home() {
                         </div>
                       </div>
                       <p className="text-sm text-gray-500">
-                        &ldquo;¡Bienvenido a Rentalia! Aquí podrás encontrar todo lo que necesitas para tus eventos.&rdquo;
+                        &quot;¡Bienvenido a Rentalia! Aquí podrás encontrar todo lo que necesitas para tus eventos.&quot;
                       </p>
                       <div className="flex mt-4">
                         {[1, 2, 3, 4, 5].map((star) => (
