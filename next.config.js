@@ -13,14 +13,7 @@ const nextConfig = {
         pathname: '/**',
       },
     ],
-  },
-  experimental: {
-    turbo: {
-      loaders: {
-        // Configuración de turbo
-      }
-    },
-  },
+  }
 }
 
 module.exports = nextConfig 
