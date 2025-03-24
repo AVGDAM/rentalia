@@ -4,14 +4,10 @@ import { Navbar } from "@/components/navbar";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Star, Calendar, MapPin, Clock, Shield, CreditCard, ChevronLeft, ChevronRight } from "lucide-react";
+import { Star, MapPin, Clock, Shield, CreditCard, ChevronLeft, ChevronRight } from "lucide-react";
 import Image from "next/image";
 import { useState, use } from "react";
-import { Calendar as CalendarComponent } from "@/components/ui/calendar";
-import { format } from "date-fns";
-import { es } from "date-fns/locale";
 import { cn } from "@/lib/utils";
-import { DateRange } from "react-day-picker";
 import {
   Dialog,
   DialogContent,
@@ -59,8 +55,6 @@ interface Articulo {
 export default function ArticuloPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = use(params);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const [selectedRange, setSelectedRange] = useState<DateRange | undefined>();
-  const [isCalendarOpen, setIsCalendarOpen] = useState(false);
 
   // Datos de ejemplo - En una aplicación real, estos vendrían de una API o base de datos
   const articulo: Articulo = {
@@ -122,9 +116,7 @@ export default function ArticuloPage({ params }: { params: Promise<{ id: string 
   };
 
   const calcularTotal = () => {
-    if (!selectedRange?.from || !selectedRange?.to) return articulo.precio + 100;
-    const dias = Math.ceil((selectedRange.to.getTime() - selectedRange.from.getTime()) / (1000 * 60 * 60 * 24));
-    return (articulo.precio * dias) + 100;
+    return articulo.precio + 100;
   };
 
   return (
@@ -248,64 +240,35 @@ export default function ArticuloPage({ params }: { params: Promise<{ id: string 
                     <span className="font-medium">€100</span>
                   </div>
 
-                  {selectedRange?.from && selectedRange?.to && (
-                    <div className="space-y-2 border rounded-lg p-4 bg-muted/50">
-                      <div className="flex items-center justify-between text-sm">
-                        <span>Desde:</span>
-                        <span className="font-medium">{format(selectedRange.from, "d 'de' MMMM", { locale: es })}</span>
-                      </div>
-                      <div className="flex items-center justify-between text-sm">
-                        <span>Hasta:</span>
-                        <span className="font-medium">{format(selectedRange.to, "d 'de' MMMM", { locale: es })}</span>
-                      </div>
-                      <div className="flex items-center justify-between text-sm pt-2 border-t">
-                        <span className="font-medium">Total:</span>
-                        <span className="font-medium">€{calcularTotal()}</span>
-                      </div>
+                  <div className="space-y-2 border rounded-lg p-4 bg-muted/50">
+                    <div className="flex items-center justify-between text-sm">
+                      <span className="font-medium">Total:</span>
+                      <span className="font-medium">€{calcularTotal()}</span>
                     </div>
-                  )}
+                  </div>
 
-                  <Dialog open={isCalendarOpen} onOpenChange={setIsCalendarOpen}>
+                  <Dialog>
                     <DialogTrigger asChild>
                       <Button className="w-full" size="lg">
-                        {selectedRange?.from ? "Cambiar fechas" : "Seleccionar fechas"}
+                        Alquilar Ahora
                       </Button>
                     </DialogTrigger>
                     <DialogContent className="sm:max-w-[425px]">
                       <DialogHeader>
-                        <DialogTitle>Selecciona las fechas de alquiler</DialogTitle>
+                        <DialogTitle>¿Estás seguro de que quieres alquilar este artículo?</DialogTitle>
                       </DialogHeader>
-                      <div className="py-6">
-                        <CalendarComponent
-                          mode="range"
-                          selected={selectedRange}
-                          onSelect={setSelectedRange}
-                          locale={es}
-                          numberOfMonths={1}
-                          disabled={(date) => date < new Date()}
-                          fromDate={new Date()}
-                          showOutsideDays={false}
-                          fixedWeeks
-                          ISOWeek
-                        />
-                      </div>
                       <DialogFooter>
                         <Button
-                          onClick={() => setIsCalendarOpen(false)}
+                          onClick={() => {
+                            // Handle booking logic here
+                          }}
                           className="w-full"
-                          disabled={!selectedRange?.from || !selectedRange?.to}
                         >
-                          Confirmar fechas
+                          Confirmar
                         </Button>
                       </DialogFooter>
                     </DialogContent>
                   </Dialog>
-
-                  {selectedRange?.from && selectedRange?.to && (
-                    <Button className="w-full" size="lg" variant="default">
-                      Alquilar Ahora
-                    </Button>
-                  )}
 
                   <div className="flex items-center justify-center text-sm text-muted-foreground">
                     <Shield className="h-4 w-4 mr-1" />
@@ -320,10 +283,6 @@ export default function ArticuloPage({ params }: { params: Promise<{ id: string 
                   <CardTitle>Información de disponibilidad</CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-4">
-                  <div className="flex items-center text-sm">
-                    <Calendar className="h-4 w-4 mr-2 text-muted-foreground" />
-                    <span>Próxima disponibilidad: {articulo.disponibilidad.proximaDisponible}</span>
-                  </div>
                   <div className="flex items-center text-sm">
                     <Clock className="h-4 w-4 mr-2 text-muted-foreground" />
                     <span>Tiempo de entrega: {articulo.disponibilidad.tiempoEntrega}</span>

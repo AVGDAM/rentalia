@@ -1,12 +1,15 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 export default function DashboardPage() {
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <h1 className="text-3xl font-bold">Resumen</h1>
-        <Button>Crear Nuevo Artículo</Button>
+        <Link href="/dashboard/articulos/nuevo">
+          <Button>Crear Nuevo Artículo</Button>
+        </Link>
       </div>
 
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
@@ -76,7 +79,7 @@ export default function DashboardPage() {
                   <div className="h-8 w-8 rounded-full bg-muted" />
                   <div className="flex-1 space-y-1">
                     <p className="text-sm font-medium leading-none">
-                      Nuevo alquiler de "Vestido de Fiesta"
+                      Nuevo alquiler de &quot;Vestido de Fiesta&quot;
                     </p>
                     <p className="text-sm text-muted-foreground">
                       Hace 2 horas
