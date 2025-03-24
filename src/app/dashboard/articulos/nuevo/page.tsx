@@ -80,16 +80,18 @@ export default function NuevoArticuloPage() {
             <div className="grid grid-cols-2 gap-4">
               <div className="space-y-2">
                 <Label htmlFor="category">Categoría</Label>
-                <Select value={formData.categoria} onValueChange={(value) => setFormData(prev => ({ ...prev, categoria: value }))}>
-                  <SelectTrigger>
-                    <SelectValue placeholder="Selecciona una categoría" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="vestidos">Vestidos</SelectItem>
-                    <SelectItem value="trajes">Trajes</SelectItem>
-                    <SelectItem value="accesorios">Accesorios</SelectItem>
-                  </SelectContent>
-                </Select>
+                <select
+                  id="category"
+                  name="categoria"
+                  value={formData.categoria}
+                  onChange={handleChange}
+                  className="flex h-10 w-full items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
+                >
+                  <option value="">Selecciona una categoría</option>
+                  <option value="vestidos">Vestidos</option>
+                  <option value="trajes">Trajes</option>
+                  <option value="accesorios">Accesorios</option>
+                </select>
               </div>
 
               <div className="space-y-2">
