@@ -16,6 +16,17 @@ import { useState } from "react";
 import { Upload } from "lucide-react";
 
 export default function NuevoArticuloPage() {
+  const [formData, setFormData] = useState({
+    nombre: "",
+    descripcion: "",
+    precio: "",
+    categoria: "",
+    talla: "",
+    estado: "disponible",
+    fechaInicio: "",
+    fechaFin: "",
+  });
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     // Aquí irá la lógica para enviar el formulario
