@@ -80,12 +80,7 @@ export default function NuevoArticuloPage() {
             <div className="grid grid-cols-2 gap-4">
               <div className="space-y-2">
                 <Label htmlFor="category">Categoría</Label>
-                <Select
-                  id="category"
-                  name="categoria"
-                  value={formData.categoria}
-                  onValueChange={(value) => setFormData(prev => ({ ...prev, categoria: value }))}
-                >
+                <Select defaultValue={formData.categoria} onValueChange={(value) => setFormData(prev => ({ ...prev, categoria: value }))}>
                   <SelectTrigger>
                     <SelectValue placeholder="Selecciona una categoría" />
                   </SelectTrigger>
@@ -93,7 +88,6 @@ export default function NuevoArticuloPage() {
                     <SelectItem value="vestidos">Vestidos</SelectItem>
                     <SelectItem value="trajes">Trajes</SelectItem>
                     <SelectItem value="accesorios">Accesorios</SelectItem>
-                    <SelectItem value="calzado">Calzado</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
