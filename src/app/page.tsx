@@ -143,8 +143,8 @@ export default function Home() {
                           <p className="text-sm text-muted-foreground">Cliente frecuente</p>
                         </div>
                       </div>
-                      <p className="text-muted-foreground">
-                        &quot;Excelente servicio. He alquilado varias prendas y siempre ha sido una experiencia increíble.&quot;
+                      <p className="text-sm text-gray-500">
+                        &ldquo;¡Bienvenido a Rentalia! Aquí podrás encontrar todo lo que necesitas para tus eventos.&rdquo;
                       </p>
                       <div className="flex mt-4">
                         {[1, 2, 3, 4, 5].map((star) => (

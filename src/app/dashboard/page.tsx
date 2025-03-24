@@ -113,6 +113,10 @@ export default function DashboardPage() {
           </CardContent>
         </Card>
       </div>
+
+      <p className="text-sm text-gray-500">
+        &ldquo;¡Bienvenido a tu panel de control! Aquí podrás gestionar todos tus artículos y reservas.&rdquo;
+      </p>
     </div>
   );
 } 
